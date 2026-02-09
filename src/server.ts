@@ -4,7 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
-import { config, runtimeAIProvider, setRuntimeAIProvider, AIProvider } from './config';
+import { config, runtimeAIProvider, setRuntimeAIProvider, AIProvider, isBotActive, setIsBotActive } from './config';
 
 const app = express();
 const httpServer = createServer(app);
@@ -48,8 +48,17 @@ app.get('/api/status', (req, res) => {
     res.json({
         whatsapp: waStatus.status,
         aiProvider: runtimeAIProvider,
+        botActive: isBotActive,
         uptime: process.uptime()
     });
+});
+
+app.post('/api/bot-toggle', (req, res) => {
+    const { active } = req.body;
+    if (typeof active !== 'boolean') return res.status(400).send("Invalid input");
+    setIsBotActive(active);
+    logToUI(`🤖 Bot is now ${active ? 'ACTIVE' : 'MUTED (Turning Off)'}`);
+    res.json({ success: true, active });
 });
 
 app.get('/api/whatsapp/status', (req, res) => {

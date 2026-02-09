@@ -1,3 +1,6 @@
-2026/02/04-12:16:38.919 2479 Reusing MANIFEST /media/dii/college disk/antigravity projects/whatbot/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
-2026/02/04-12:16:38.925 2479 Recovering log #3
-2026/02/04-12:16:38.925 2479 Reusing old log /media/dii/college disk/antigravity projects/whatbot/.wwebjs_auth/session/Default/Local Storage/leveldb/000003.log 
+2026/02/09-22:13:53.508 25ae Reusing MANIFEST /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/02/09-22:13:53.517 25ae Recovering log #4
+2026/02/09-22:13:53.518 25ae Reusing old log /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/Local Storage/leveldb/000004.log 
+2026/02/09-22:54:02.795 25b5 Level-0 table #8: started
+2026/02/09-22:54:02.798 25b5 Level-0 table #8: 15985 bytes OK
+2026/02/09-22:54:02.801 25b5 Delete type=0 #4

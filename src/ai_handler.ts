@@ -11,11 +11,11 @@ const AI_PROVIDERS: Record<AIProvider, { apiKey: string | undefined, baseURL: st
     gemini: {
         apiKey: config.geminiApiKey,
         baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai',
-        model: 'gemini-1.5-flash'
+        model: 'gemini-2.0-flash'
     },
     assemblyai: {
         apiKey: config.assemblyaiApiKey,
-        baseURL: 'https://api.assemblyai.com/lemur/v3',
+        baseURL: 'https://llm-gateway.assemblyai.com/v1',
         model: 'anthropic/claude-3-5-sonnet'
     }
 };

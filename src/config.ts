@@ -19,9 +19,14 @@ export const config = {
     specialContact: (process.env.SPECIAL_CONTACT || '917095191249').replace(/\s/g, '').replace('+', ''),
 };
 
-// Runtime mutable state for AI provider (can be changed without restart)
+// Runtime mutable state (can be changed without restart)
 export let runtimeAIProvider: AIProvider = config.selectedAIProvider;
+export let isBotActive = true;
 
 export function setRuntimeAIProvider(provider: AIProvider) {
     runtimeAIProvider = provider;
+}
+
+export function setIsBotActive(active: boolean) {
+    isBotActive = active;
 }

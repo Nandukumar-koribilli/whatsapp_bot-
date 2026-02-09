@@ -1,11 +1,17 @@
 import { Client, Message } from 'whatsapp-web.js';
-import { config } from './config';
+import { config, isBotActive } from './config';
 import { generateSmartReply } from './ai_handler';
 
 export async function handleIncomingMessage(message: Message, client: Client) {
     try {
         // 1. Validations
         if (message.fromMe) return;
+
+        // Check if bot is turned off
+        if (!isBotActive) {
+            // console.log("   -> Bot is currently OFF/MUTED. Ignoring message.");
+            return;
+        }
 
         if (message.isStatus) {
             console.log("   -> Ignoring status update.");
