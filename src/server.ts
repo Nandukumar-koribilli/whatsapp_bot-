@@ -80,7 +80,7 @@ app.get('/api/ai-provider', (req, res) => {
 
 app.post('/api/ai-provider', (req, res) => {
     const { provider } = req.body;
-    const validProviders: AIProvider[] = ['mistral', 'gemini', 'assemblyai'];
+    const validProviders: AIProvider[] = ['mistral'];
     if (!validProviders.includes(provider)) {
         return res.status(400).json({ error: 'Invalid provider' });
     }
@@ -96,10 +96,8 @@ app.get('/api/logs', (req, res) => {
 app.get('/api/skills', (req, res) => {
     const content = fs.readFileSync(path.join(__dirname, 'ai_handler.ts'), 'utf-8');
     const generalMatch = content.match(/const GENERAL_PROMPT = `([\s\S]*?)`;/);
-    const didiMatch = content.match(/const DIDI_PROMPT = `([\s\S]*?)`;/);
     res.json({
         generalPrompt: generalMatch ? generalMatch[1].trim() : "Error reading prompt",
-        didiPrompt: didiMatch ? didiMatch[1].trim() : "Error reading prompt"
     });
 });
 

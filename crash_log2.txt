@@ -1,0 +1,92 @@
+﻿[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+node.exe : C:\Users\Go
+vin\Documents\nandu\wh
+atsapp_bot-\node_modul
+es\ts-node\src\index.t
+s:859
+At line:1 char:1
++ & "C:\Program Files\
+nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo    
+          : 
+NotSpecified: (C    
+:\Users\Govin\...rc\i 
+   
+ndex.ts:859:String) [ 
+   ], RemoteException
+    + 
+FullyQualifiedError   
+ Id : 
+NativeCommandErr    or
+ 
+    return new TSError
+(diagnosticText, 
+diagnosticCodes, 
+diagnostics);
+           ^
+TSError: Γ¿» Unable 
+to compile TypeScript:
+src/whatsapp.ts(89,9):
+ error TS1308: 
+'await' expressions 
+are only allowed 
+within async 
+functions and at the 
+top levels of modules.
+
+    at createTSError (
+C:\Users\Govin\Documen
+ts\nandu\whatsapp_bot-
+\node_modules\ts-node\
+src\index.ts:859:12)
+    at reportTSError (
+C:\Users\Govin\Documen
+ts\nandu\whatsapp_bot-
+\node_modules\ts-node\
+src\index.ts:863:19)
+    at getOutput (C:\U
+sers\Govin\Documents\n
+andu\whatsapp_bot-\nod
+e_modules\ts-node\src\
+index.ts:1077:36)
+    at Object.compile 
+(C:\Users\Govin\Docume
+nts\nandu\whatsapp_bot
+-\node_modules\ts-node
+\src\index.ts:1433:41)
+    at 
+Module.m._compile (C:\
+Users\Govin\Documents\
+nandu\whatsapp_bot-\no
+de_modules\ts-node\src
+\index.ts:1617:30)
+    at node:internal/m
+odules/cjs/loader:1893
+:10
+    at Object.require.
+extensions.<computed> 
+[as .ts] (C:\Users\Gov
+in\Documents\nandu\wha
+tsapp_bot-\node_module
+s\ts-node\src\index.ts
+:1621:12)
+    at Module.load (no
+de:internal/modules/cj
+s/loader:1481:32)
+    at Module._load (n
+ode:internal/modules/c
+js/loader:1300:12)
+    at TracingChannel.
+traceSync (node:diagno
+stics_channel:328:14) 
+{
+  diagnosticCodes: [ 
+1308 ]
+}

@@ -1,0 +1,111 @@
+﻿[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒöÉ encrypt with Dotenvx: https://dotenvx.com
+[2:38:04 pm] ≡ƒÜÇ Starting Bot Server...
+[2:38:04 pm] ≡ƒÜÇ Backend Server running on http://localhost:3000
+[2:38:04 pm] ≡ƒÜÇ Starting WhatsApp Client...
+node.exe : C:\Users\Govin\
+Documents\nandu\whatsapp_b
+ot-\node_modules\puppeteer
+-core\src\common\CallbackR
+egistry.ts:129
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (C  
+  :\Users\Govin\...Regi   
+ stry.ts:129:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+  #error = new 
+ProtocolError();
+           ^
+ProtocolError: Protocol 
+error 
+(Runtime.callFunctionOn): 
+Execution context was 
+destroyed.
+    at Callback.<instance_
+members_initializer> (C:\U
+sers\Govin\Documents\nandu
+\whatsapp_bot-\node_module
+s\puppeteer-core\src\commo
+n\CallbackRegistry.ts:129:
+12)
+    at new Callback (C:\Us
+ers\Govin\Documents\nandu\
+whatsapp_bot-\node_modules
+\puppeteer-core\src\common
+\CallbackRegistry.ts:134:3
+)
+    at 
+CallbackRegistry.create (C
+:\Users\Govin\Documents\na
+ndu\whatsapp_bot-\node_mod
+ules\puppeteer-core\src\co
+mmon\CallbackRegistry.ts:3
+2:22)
+    at 
+Connection._rawSend (C:\Us
+ers\Govin\Documents\nandu\
+whatsapp_bot-\node_modules
+\puppeteer-core\src\cdp\Co
+nnection.ts:150:22)
+    at CdpCDPSession.send 
+(C:\Users\Govin\Documents\
+nandu\whatsapp_bot-\node_m
+odules\puppeteer-core\src\
+cdp\CdpSession.ts:104:29)
+    at ExecutionContext.#e
+valuate (C:\Users\Govin\Do
+cuments\nandu\whatsapp_bot
+-\node_modules\puppeteer-c
+ore\src\cdp\ExecutionConte
+xt.ts:424:44)
+    at 
+ExecutionContext.evaluate 
+(C:\Users\Govin\Documents\
+nandu\whatsapp_bot-\node_m
+odules\puppeteer-core\src\
+cdp\ExecutionContext.ts:29
+3:32)
+    at 
+IsolatedWorld.evaluate (C:
+\Users\Govin\Documents\nan
+du\whatsapp_bot-\node_modu
+les\puppeteer-core\src\cdp
+\IsolatedWorld.ts:196:26)
+    at CdpFrame.evaluate (
+C:\Users\Govin\Documents\n
+andu\whatsapp_bot-\node_mo
+dules\puppeteer-core\src\a
+pi\Frame.ts:488:35)
+    at 
+CdpFrame.<anonymous> (C:\U
+sers\Govin\Documents\nandu
+\whatsapp_bot-\node_module
+s\puppeteer-core\src\util\
+decorators.ts:63:21)
+    at CdpPage.evaluate (C
+:\Users\Govin\Documents\na
+ndu\whatsapp_bot-\node_mod
+ules\puppeteer-core\src\ap
+i\Page.ts:2341:35)
+    at Client.inject (C:\U
+sers\Govin\Documents\nandu
+\whatsapp_bot-\node_module
+s\whatsapp-web.js\src\Clie
+nt.js:124:55)
+    at async 
+Client.initialize (C:\User
+s\Govin\Documents\nandu\wh
+atsapp_bot-\node_modules\w
+hatsapp-web.js\src\Client.
+js:373:9)

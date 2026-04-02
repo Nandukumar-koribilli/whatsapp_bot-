@@ -4,8 +4,6 @@ import { CheckCircle, XCircle, Bot, Power, PowerOff } from 'lucide-react';
 
 const AI_PROVIDERS = [
     { id: 'mistral', name: 'Mistral', color: 'text-orange-400' },
-    { id: 'gemini', name: 'Gemini 2.0', color: 'text-blue-400' },
-    { id: 'assemblyai', name: 'AssemblyAI', color: 'text-purple-400' },
 ];
 
 export function Overview() {

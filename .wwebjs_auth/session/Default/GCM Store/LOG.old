@@ -1,3 +1,2 @@
-2026/02/09-22:13:56.719 2591 Reusing MANIFEST /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/GCM Store/MANIFEST-000001
-2026/02/09-22:13:56.719 2591 Recovering log #3
-2026/02/09-22:13:56.719 2591 Reusing old log /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/GCM Store/000003.log 
+2026/04/01-20:21:26.575 488c Creating DB C:\Users\nandu\OneDrive\Desktop\whatsapp_bot-\.wwebjs_auth\session\Default\GCM Store since it was missing.
+2026/04/01-20:21:26.700 488c Reusing MANIFEST C:\Users\nandu\OneDrive\Desktop\whatsapp_bot-\.wwebjs_auth\session\Default\GCM Store/MANIFEST-000001

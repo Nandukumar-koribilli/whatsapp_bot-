@@ -1,3 +1,6 @@
-2026/02/09-22:54:19.832 50ff Reusing MANIFEST /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
-2026/02/09-22:54:19.838 50ff Recovering log #7
-2026/02/09-22:54:19.838 50ff Reusing old log /home/dii/Documents/whatbot/whatsapp_bot-/.wwebjs_auth/session/Default/Local Storage/leveldb/000007.log 
+2026/04/01-20:48:13.305 4340 Reusing MANIFEST C:\Users\nandu\OneDrive\Desktop\whatsapp_bot-\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2026/04/01-20:48:13.322 4340 Recovering log #4
+2026/04/01-20:48:13.338 4340 Reusing old log C:\Users\nandu\OneDrive\Desktop\whatsapp_bot-\.wwebjs_auth\session\Default\Local Storage\leveldb/000004.log 
+2026/04/01-20:56:14.166 4340 Level-0 table #8: started
+2026/04/01-20:56:14.194 4340 Level-0 table #8: 22192 bytes OK
+2026/04/01-20:56:14.197 4340 Delete type=0 #4

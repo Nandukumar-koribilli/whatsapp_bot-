@@ -28,15 +28,20 @@ export function getRecentMessages() {
     return recentMessages;
 }
 
-export function startWhatsApp() {
+export async function startWhatsApp() {
     console.log("🚀 Starting WhatsApp Client...");
     connectionStatus = 'connecting';
 
     whatsappClient = new Client({
         authStrategy: new LocalAuth(),
         puppeteer: {
-            args: ['--no-sandbox'],
-        }
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+            headless: true,
+        },
+        webVersionCache: {
+            type: 'remote',
+            remotePath: 'https://raw.githubusercontent.com/nicpottier/nicpottier.github.io/refs/heads/main/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/',
+        },
     });
 
     whatsappClient.on('qr', (qr) => {
@@ -80,7 +85,15 @@ export function startWhatsApp() {
         await handleIncomingMessage(message, whatsappClient!);
     });
 
-    whatsappClient.initialize();
+    try {
+        await whatsappClient.initialize();
+    } catch (err) {
+        console.log('❌ WhatsApp initialization failed:', err);
+        console.log('🔄 Retrying in 5 seconds...');
+        connectionStatus = 'disconnected';
+        getIO()?.emit('whatsapp-status', connectionStatus);
+        setTimeout(() => startWhatsApp(), 5000);
+    }
 }
 
 export async function logoutWhatsApp() {

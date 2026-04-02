@@ -63,7 +63,7 @@ export async function handleIncomingMessage(message: Message, client: Client) {
         await chat.sendStateTyping();
 
         // Fetch last 20 messages for context
-        const historyMessages = await chat.fetchMessages({ limit: 20 });
+        const historyMessages = await chat.fetchMessages({ limit: 5 });
         const chatHistory = historyMessages.map(msg => ({
             role: msg.fromMe ? 'assistant' as const : 'user' as const,
             content: msg.body
@@ -72,7 +72,6 @@ export async function handleIncomingMessage(message: Message, client: Client) {
             chatHistory.pop();
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
 
         const aiResponse = await generateSmartReply(message.body, senderName, chatHistory, senderNumber);
 

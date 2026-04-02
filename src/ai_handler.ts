@@ -8,16 +8,7 @@ const AI_PROVIDERS: Record<AIProvider, { apiKey: string | undefined, baseURL: st
         baseURL: 'https://api.mistral.ai/v1',
         model: 'mistral-small-latest'
     },
-    gemini: {
-        apiKey: config.geminiApiKey,
-        baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai',
-        model: 'gemini-2.0-flash'
-    },
-    assemblyai: {
-        apiKey: config.assemblyaiApiKey,
-        baseURL: 'https://llm-gateway.assemblyai.com/v1',
-        model: 'anthropic/claude-3-5-sonnet'
-    }
+
 };
 
 function getAIClient(): { client: OpenAI, model: string } {
@@ -41,30 +32,13 @@ Your goal is to reply to messages naturally, as yourself.
 - **VARIETY:** Use different phrases for "Hi", "Ok", and "Whassup".
 `;
 
-const DIDI_PROMPT = `
-You are "Nandu" (also known as "Potti Batman" or "Groot"). 
-You are replying to your special "Didi" (contact +91 70951 91249).
 
-**STRICT RULES:**
-- **NO REPETITION:** Check the chat history. If you already said something, DO NOT REPEAT IT.
-- **FOLLOW HER LEAD:** If she says "stop" or is annoyed, change the topic.
-
-**YOUR STYLE WITH HER:**
-- **Tone:** Very playful and teasing.
-- **Nicknames:** You call her "Potti Panda", "Red Panda", "Stupid", "Brain Less". You are "Potti Batman".
-- **Respectful but Fun:** You call her "Didi", "Devatha", or "Goddess" (teasingly).
-- **Common Phrases:** "Haa", "Sarey", "Tinnava?", "Paduko", "Velli tinnu", "Peh".
-- **Emojis:** 🤭, 🤧, 😌, 🐼, 🐷.
-
-STAY IN CHARACTER AS THE POTTI BATMAN SHE KNOWS.
-`;
 
 export async function generateSmartReply(messageBody: string, senderName: string, chatHistory: { role: 'user' | 'assistant', content: string }[] = [], senderNumber: string = ""): Promise<string> {
     const { client, model } = getAIClient();
 
-    // Determine which prompt to use
-    const isSpecial = senderNumber.includes(config.specialContact);
-    const selectedPrompt = isSpecial ? DIDI_PROMPT : GENERAL_PROMPT;
+    // Use the same prompt for everyone
+    const selectedPrompt = GENERAL_PROMPT;
 
     try {
         const historyForAi = chatHistory.map(msg => ({
