@@ -4,6 +4,7 @@ import { CheckCircle, XCircle, Bot, Power, PowerOff } from 'lucide-react';
 
 const AI_PROVIDERS = [
     { id: 'mistral', name: 'Mistral', color: 'text-orange-400' },
+    { id: 'nvidia', name: 'NVIDIA', color: 'text-green-400' },
 ];
 
 export function Overview() {

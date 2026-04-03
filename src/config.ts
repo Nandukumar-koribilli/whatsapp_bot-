@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export type AIProvider = 'mistral';
+export type AIProvider = 'mistral' | 'nvidia';
 
 export const config = {
     // AI Provider Selection
@@ -9,6 +9,7 @@ export const config = {
 
     // API Keys
     mistralApiKey: process.env.MISTRAL_API_KEY,
+    nvidiaApiKey: process.env.NVIDIA_API_KEY,
 
     // Bot Settings
     triggerKeyword: process.env.BOT_TRIGGER_KEYWORD || '',

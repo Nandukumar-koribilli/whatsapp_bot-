@@ -41,7 +41,7 @@ console.log = (...args) => {
 
 // --- API Endpoints ---
 
-import { getWhatsAppStatus, getRecentMessages, logoutWhatsApp, startWhatsApp } from './whatsapp';
+import { getWhatsAppStatus, getRecentMessages, logoutWhatsApp, startWhatsApp, getWhatsAppChats, getWhatsAppChatMessages, sendWhatsAppMessage } from './whatsapp';
 
 app.get('/api/status', (req, res) => {
     const waStatus = getWhatsAppStatus();
@@ -69,6 +69,41 @@ app.get('/api/whatsapp/messages', (req, res) => {
     res.json(getRecentMessages());
 });
 
+app.get('/api/whatsapp/chats', async (req, res) => {
+    try {
+        res.json(await getWhatsAppChats());
+    } catch (error) {
+        console.error('Failed to load WhatsApp chats:', error);
+        res.status(500).json({ error: 'Failed to load WhatsApp chats' });
+    }
+});
+
+app.get('/api/whatsapp/chats/:chatId/messages', async (req, res) => {
+    try {
+        const limit = req.query.limit ? Number(req.query.limit) : 50;
+        const messages = await getWhatsAppChatMessages(req.params.chatId, Number.isFinite(limit) ? limit : 50);
+        res.json(messages);
+    } catch (error) {
+        console.error(`Failed to load messages for chat ${req.params.chatId}:`, error);
+        res.status(500).json({ error: 'Failed to load chat messages' });
+    }
+});
+
+app.post('/api/whatsapp/chats/:chatId/messages', async (req, res) => {
+    try {
+        const { body } = req.body;
+        if (typeof body !== 'string' || !body.trim()) {
+            return res.status(400).json({ error: 'Message body is required' });
+        }
+
+        const sentMessage = await sendWhatsAppMessage(req.params.chatId, body.trim());
+        res.json({ success: true, message: sentMessage });
+    } catch (error) {
+        console.error(`Failed to send message to chat ${req.params.chatId}:`, error);
+        res.status(500).json({ error: 'Failed to send message' });
+    }
+});
+
 app.post('/api/whatsapp/logout', async (req, res) => {
     await logoutWhatsApp();
     res.json({ success: true, message: 'Logged out and restarting...' });
@@ -80,7 +115,7 @@ app.get('/api/ai-provider', (req, res) => {
 
 app.post('/api/ai-provider', (req, res) => {
     const { provider } = req.body;
-    const validProviders: AIProvider[] = ['mistral'];
+    const validProviders: AIProvider[] = ['mistral', 'nvidia'];
     if (!validProviders.includes(provider)) {
         return res.status(400).json({ error: 'Invalid provider' });
     }

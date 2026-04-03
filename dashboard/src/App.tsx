@@ -3,7 +3,8 @@ import { Overview } from './components/Overview';
 import { LiveTerminal } from './components/LiveTerminal';
 import { Skills } from './components/Skills';
 import { WhatsApp } from './components/WhatsApp';
-import { LayoutDashboard, Terminal, Brain, MessageCircle } from 'lucide-react';
+import { Chats } from './components/Chats';
+import { LayoutDashboard, Terminal, Brain, MessageCircle, MessagesSquare } from 'lucide-react';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <nav className="space-y-2 flex-1">
                         <NavItem to="/" icon={<LayoutDashboard size={20} />} label="Overview" />
                         <NavItem to="/whatsapp" icon={<MessageCircle size={20} />} label="WhatsApp" />
+                        <NavItem to="/chats" icon={<MessagesSquare size={20} />} label="Chats" />
                         <NavItem to="/terminal" icon={<Terminal size={20} />} label="Live Terminal" />
                         <NavItem to="/skills" icon={<Brain size={20} />} label="Bot Persona" />
                     </nav>
@@ -26,6 +28,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Overview />} />
                         <Route path="/whatsapp" element={<WhatsApp />} />
+                        <Route path="/chats" element={<Chats />} />
                         <Route path="/terminal" element={<LiveTerminal />} />
                         <Route path="/skills" element={<Skills />} />
                     </Routes>

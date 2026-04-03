@@ -62,8 +62,8 @@ export async function handleIncomingMessage(message: Message, client: Client) {
 
         await chat.sendStateTyping();
 
-        // Fetch last 20 messages for context
-        const historyMessages = await chat.fetchMessages({ limit: 5 });
+        // Fetch more old messages so the bot can continue the same conversation naturally
+        const historyMessages = await chat.fetchMessages({ limit: 30 });
         const chatHistory = historyMessages.map(msg => ({
             role: msg.fromMe ? 'assistant' as const : 'user' as const,
             content: msg.body
