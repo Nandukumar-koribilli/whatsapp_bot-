@@ -46,28 +46,42 @@ export function getRecentMessages() {
     return recentMessages;
 }
 
+function isWhatsAppReady() {
+    return connectionStatus === 'connected' && whatsappClient !== null;
+}
+
 export async function getWhatsAppChats(): Promise<ChatSummary[]> {
-    if (!whatsappClient) {
+    if (!isWhatsAppReady()) {
         return [];
     }
 
-    const chats = await whatsappClient.getChats();
-    return chats.map((chat) => ({
-        id: chat.id._serialized,
-        name: chat.name || chat.id.user || chat.id._serialized,
-        lastMessage: chat.lastMessage?.body || 'No messages yet',
-        timestamp: chat.lastMessage?.timestamp ? chat.lastMessage.timestamp * 1000 : 0,
-        unreadCount: chat.unreadCount || 0,
-        isGroup: chat.isGroup,
-    }));
+    try {
+        const client = whatsappClient;
+        if (!client) return [];
+        const chats = await client.getChats();
+        return chats.map((chat) => ({
+            id: chat.id._serialized,
+            name: chat.name || chat.id.user || chat.id._serialized,
+            lastMessage: chat.lastMessage?.body || 'No messages yet',
+            timestamp: chat.lastMessage?.timestamp ? chat.lastMessage.timestamp * 1000 : 0,
+            unreadCount: chat.unreadCount || 0,
+            isGroup: chat.isGroup,
+        }));
+    } catch (error) {
+        console.error('Failed to get WhatsApp chats:', error);
+        return [];
+    }
 }
 
 export async function getWhatsAppChatMessages(chatId: string, limit = 50): Promise<ChatHistoryMessage[]> {
-    if (!whatsappClient) {
+    if (!isWhatsAppReady()) {
         return [];
     }
 
-    const chat = await whatsappClient.getChatById(chatId);
+    const client = whatsappClient;
+    if (!client) return [];
+
+    const chat = await client.getChatById(chatId);
     const messages = await chat.fetchMessages({ limit });
 
     return messages.map((message: Message) => ({
@@ -81,11 +95,16 @@ export async function getWhatsAppChatMessages(chatId: string, limit = 50): Promi
 }
 
 export async function sendWhatsAppMessage(chatId: string, body: string): Promise<ChatHistoryMessage | null> {
-    if (!whatsappClient) {
+    if (!isWhatsAppReady()) {
         throw new Error('WhatsApp client is not connected');
     }
 
-    const chat = await whatsappClient.getChatById(chatId);
+    const client = whatsappClient;
+    if (!client) {
+        throw new Error('WhatsApp client is not connected');
+    }
+
+    const chat = await client.getChatById(chatId);
     const sentMessage = await chat.sendMessage(body);
 
     return {
@@ -102,7 +121,7 @@ export async function startWhatsApp() {
     console.log("🚀 Starting WhatsApp Client...");
     connectionStatus = 'connecting';
 
-    const userDataDir = path.join(__dirname, '../.wwebjs_auth/session');
+    const userDataDir = path.join(process.cwd(), '.wwebjs_auth');
 
     // Check if the browser is already running and terminate it
     if (fs.existsSync(userDataDir)) {
@@ -192,6 +211,12 @@ export async function startWhatsApp() {
         await whatsappClient.initialize();
     } catch (err) {
         console.error('❌ WhatsApp initialization failed:', err);
+        try {
+            await whatsappClient.destroy();
+        } catch (destroyError) {
+            console.error('❌ Failed to destroy WhatsApp client after init error:', destroyError);
+        }
+        whatsappClient = null;
         console.log('🔄 Retrying in 5 seconds...');
         connectionStatus = 'disconnected';
         getIO()?.emit('whatsapp-status', connectionStatus);

@@ -71,7 +71,8 @@ app.get('/api/whatsapp/messages', (req, res) => {
 
 app.get('/api/whatsapp/chats', async (req, res) => {
     try {
-        res.json(await getWhatsAppChats());
+        const chats = await getWhatsAppChats();
+        res.json(chats);
     } catch (error) {
         console.error('Failed to load WhatsApp chats:', error);
         res.status(500).json({ error: 'Failed to load WhatsApp chats' });
