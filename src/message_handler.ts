@@ -62,12 +62,18 @@ export async function handleIncomingMessage(message: Message, client: Client) {
 
         await chat.sendStateTyping();
 
-        // Fetch more old messages so the bot can continue the same conversation naturally
-        const historyMessages = await chat.fetchMessages({ limit: 30 });
-        const chatHistory = historyMessages.map(msg => ({
-            role: msg.fromMe ? 'assistant' as const : 'user' as const,
-            content: msg.body
-        }));
+        // Fetch old messages when available; continue without history if WhatsApp Web fails here.
+        let chatHistory: { role: 'user' | 'assistant', content: string }[] = [];
+        try {
+            const historyMessages = await chat.fetchMessages({ limit: 30 });
+            chatHistory = historyMessages.map(msg => ({
+                role: msg.fromMe ? 'assistant' as const : 'user' as const,
+                content: msg.body
+            }));
+        } catch (historyError) {
+            console.warn(`   -> History fetch failed for ${senderNumber}, replying without history.`);
+        }
+
         if (chatHistory.length > 0 && chatHistory[chatHistory.length - 1].content === message.body) {
             chatHistory.pop();
         }

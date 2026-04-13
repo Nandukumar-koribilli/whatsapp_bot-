@@ -141,12 +141,12 @@ export async function startWhatsApp() {
     whatsappClient = new Client({
         authStrategy: new LocalAuth({ dataPath: userDataDir }),
         puppeteer: {
-            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
             headless: true,
         },
         webVersionCache: {
-            type: 'remote',
-            remotePath: 'https://raw.githubusercontent.com/nicpottier/nicpottier.github.io/refs/heads/main/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/nicpottier.github.io/nicpottier/',
+            // Use the built-in local cache to avoid brittle remote web version URLs.
+            type: 'local',
         },
     });
 
@@ -199,8 +199,14 @@ export async function startWhatsApp() {
             recentMessages.push(msgData);
             if (recentMessages.length > 50) recentMessages.shift();
             getIO()?.emit('whatsapp-message', msgData);
+        } catch (err) {
+            console.error('❌ Error storing message for UI:', err);
+        }
+    });
 
-            // Handle incoming
+    // Handle incoming only. This avoids duplicate/self events from message_create.
+    whatsappClient.on('message', async (message: Message) => {
+        try {
             await handleIncomingMessage(message, whatsappClient!);
         } catch (err) {
             console.error('❌ Error handling incoming message:', err);
